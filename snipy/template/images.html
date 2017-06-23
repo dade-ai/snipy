@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+<header>
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</header>
+<style> /* set the CSS */
+
+text.tooltip {
+  font: bold 20px sans-serif;
+  text-anchor: middle;
+  fill: white;
+  fill-opacity: 0.0;
+}
+
+
+</style>
+<script>
+
+/*
+   example list of images
+
+    var data = [
+    ["/data/img/some.png",
+     "/data/img/some.png",
+     "/data/img/some.png"],
+    ["/data/img/some.png",
+     "/data/img/some.png",
+     "/data/img/some.png"],
+    ["/data/img/some.png",
+     "/data/img/some.png",
+     "/data/img/some.png"]
+    ]; */
+
+  var data = {{data}}
+
+  var w = {{width}}
+     ,h = {{height}};
+  var space = {{space}};
+  var grid = {w: w + space, h: h + space};
+  var margin = {top: h/2, right: w/2, bottom: h/2, left: w/2};
+
+  var svg = d3.select("body")
+    .append("svg")
+    .attr("width", w * data[0].length + margin.left + margin.right)
+    .attr("height", h * data.length + margin.top + margin.bottom);
+
+  var tooltip = svg.append("g")
+    .classed("tooltip", true)
+    .datum({name: "test", x:0, y:0, opacity:1.0});
+
+  var tiprect = tooltip.append("rect").classed("tooltip", true)
+      .attr("rx", 6).attr("ry", 6)
+      .attr("width", w*2).attr("height", 30)
+      .style("fill", "lightpink");
+
+  var tiptext = tooltip.append("text").classed("tooltip", true)
+        .attr("x", margin.left + w/2)
+        .attr("y", 22)
+        .text("test");
+
+  function udpatetooltip(name, x, y, opacity)
+  {
+    tiptext.transition()
+      .duration(200)
+      .text(name)
+      .style("fill-opacity", opacity);
+
+    tooltip.transition().duration(200)
+      .attr("transform", `translate(${x}, ${y})`);
+
+    tiprect.transition()
+      .duration(200)
+      .style("fill-opacity", opacity);
+
+    tooltip.node().parentNode.appendChild(tooltip.node());
+  }
+  udpatetooltip("", 0, 0, 0);
+
+  var row = svg.selectAll("g.row").data(data);
+  row.enter().append("g").classed("row", true);
+  row.exit().remove();
+
+  var avt = row.selectAll("image")
+    .data(function(d) { return d;});
+
+  avt.enter().append("image")
+    .attr("xlink:href", function(d) { return d;})
+    .attr("width", w)
+    .attr("height", h)
+    .attr("x", function (d, i, j) { return i * grid.w + margin.left;})
+    .attr("y", function (d, i, j) { return j * grid.h + margin.top;})
+    .on("mouseenter", flash("mouseenter", w*2, h*2, true, 0.9))
+    .on("mouseover", flash("mouseover", w*2, h*2, true, 0.9))
+    .on("mouseout", flash("mouseout", w, h, false, 0))
+    .on("mouseleave", flash("mouseleave", w, h, false, 0));
+
+  avt.exit().remove();
+
+  function filename(f)
+  {
+   var s = f.split("/");
+   var last = s[s.length-1]
+
+   return last
+  }
+
+  function flash(name, width, height, front, opacity)
+  {
+    return function(d, i, j) {
+      d3.select(this)
+        .transition()
+        .duration(200)
+        .attr("width", width)
+        .attr("height", height)
+        .attr("x", function () { return i * grid.w + w/2 - width/2 + margin.left;})
+        .attr("y", function () { return j * grid.h + h - height + margin.top;});
+
+      console.log(i,j)
+      udpatetooltip(filename(d), i*grid.w, j*grid.h + 1.1*grid.h + margin.top, opacity);
+
+      if (front==true) {
+        this.parentNode.appendChild(this);
+        this.parentNode.parentNode.appendChild(this.parentNode);
+      }
+
+    }
+  }
+
+</script>
+<body>
+
+
+</body>
+</html>
