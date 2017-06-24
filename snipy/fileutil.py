@@ -4,6 +4,7 @@ import os
 from codecs import open
 import scandir
 from .ilogging import logg
+import numpy as np
 
 
 def mkdir_if_not(filepath, ispath=False):
@@ -440,7 +441,6 @@ def imsave(fname, *args, **kwargs):
 
 def imread_palette(fname, expand=True, dtype='uint8', mode='r'):
     from PIL import Image
-    import numpy as np
 
     # use png? https://pythonhosted.org/pypng/png.html ?
 
