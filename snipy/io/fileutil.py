@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import os
 from codecs import open
 import scandir
-from .ilogging import logg
+from snipy.ilogging import logg
 import numpy as np
 
 
@@ -28,6 +28,11 @@ def mkdir_if_not(filepath, ispath=False):
 
 
 def readlines(filepath):
+    """
+    read lines from a textfile
+    :param filepath:
+    :return: list[line]
+    """
     with open(filepath, 'rt') as f:
         lines = f.readlines()
         lines = map(str.strip, lines)

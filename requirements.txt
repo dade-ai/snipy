@@ -10,3 +10,4 @@ h5py==2.7.0
 joblib>=0.11
 noise>=1.2.2
 skimage>=0.0
+pympler

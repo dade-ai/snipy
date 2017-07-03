@@ -106,6 +106,28 @@ def tuple_args(fn):
     return wrapped
 
 
+def unpack_args(classfun, nth=0):
+    """
+    args 갯수가 nth + 1 개 일때, 그게 만약 tuple이면, unpack
+    :param classfun:
+    :param nth: nth = 0, 일반 함수, nth = 1: 클래스 함수 1이 self니깐.
+    :return:
+    """
+    if classfun:
+        nth = 1
+
+    def deco(fn):
+        def wrapped(*args, **kwargs):
+            if len(args) == nth + 1 and isinstance(args[nth], (tuple, list)):
+                args = tuple(args[:nth] + args[nth])
+                return fn(*args, **kwargs)
+            else:
+                return fn(*args, **kwargs)
+        return wrapped
+
+    return deco
+
+
 def optional_str(deco):
     """
     string 1개만 deco 인자로 오거나 없거나.

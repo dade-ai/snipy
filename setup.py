@@ -20,7 +20,7 @@ setup(name='snipy',
       long_description='snippet-like code to make snippet-like code',
 
       # The project's main homepage.
-      url='https://github.com/dade-u/snipy',
+      url='https://github.com/dade-ai/snipy',
       author='dade',
       author_email='aiplore@gmail.com',
 

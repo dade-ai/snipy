@@ -3,8 +3,8 @@ from __future__ import absolute_import
 from itertools import izip
 
 import numpy as np
-from . import irandom as rand
-from .basic import tuple_args
+from snipy import irandom as rand
+from snipy.basic import tuple_args
 # from snipy.concurrent import SharedPool
 
 # todo imread with resize ..

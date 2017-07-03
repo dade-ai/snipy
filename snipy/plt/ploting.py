@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
-from .ilogging import logg
-from .basic import tuple_args
-from .progress import progress
+from snipy.ilogging import logg
+from snipy.basic import tuple_args
+from snipy.progress import progress
 import contextlib
 import matplotlib.pyplot as plt
 import numpy as np

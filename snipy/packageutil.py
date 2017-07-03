@@ -3,6 +3,7 @@
 package util, inspection related
 """
 from __future__ import absolute_import
+
 import os
 import sys
 from os.path import dirname
@@ -15,7 +16,7 @@ def guess_package_path(searchfrom):
     """
     package path. return None if failed to guess
     """
-    from . import fileutil
+    from snipy.io import fileutil
 
     current = searchfrom + '/'
     init_found = False
