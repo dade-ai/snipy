@@ -62,4 +62,5 @@ setup(name='snipy',
             'joblib',
             'noise',
             'skimage',
+            'pympler'
       ])
