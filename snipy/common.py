@@ -7,7 +7,10 @@ from .tictoc import *
 from .dictobj import *
 from .flags import *
 from .basic import *
-from .jsonutil import *
+try:
+    from .jsonutil import *
+except ImportError:
+    pass
 from .concurrent import *
 from .tictoc import *
 from .stringutil import *
