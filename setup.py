@@ -3,7 +3,7 @@
 reference : https://github.com/pypa/sampleproject/blob/master/setup.py
 """
 
-from setuptools import setup
+from setuptools import (setup, find_packages)
 from codecs import open
 from os import path
 
@@ -48,7 +48,7 @@ setup(name='snipy',
           'Programming Language :: Python :: 2.7',
       ],
 
-      packages=['snipy'],
+      packages=find_packages(),
       install_requires=[
             'six',
             'Jinja2',
