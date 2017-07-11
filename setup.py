@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 
 setup(name='snipy',
-      version='0.0.1',
+      version='0.0.2',
       description='python utility @ your own risk',
       long_description='snippet-like code to make snippet-like code',
 
@@ -61,6 +61,6 @@ setup(name='snipy',
             'h5py',
             'joblib',
             'noise',
-            'skimage',
+            'scikit-image',
             'pympler'
       ])
