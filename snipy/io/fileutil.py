@@ -232,9 +232,12 @@ def listfile(p):
     generator of list files in the path.
     filenames only
     """
-    for entry in scandir.scandir(p):
-        if entry.is_file():
-            yield entry.name
+    try:
+        for entry in scandir.scandir(p):
+            if entry.is_file():
+                yield entry.name
+    except OSError:
+        return
 
 
 def listfilepath(p):
@@ -287,24 +290,28 @@ def get_match_fun(patterns, patterntype):
     return _re_match
 
 
+def _is_str(x):
+    return isinstance(x, (str, basestring))
+
+
 def _pred_pattern(match='*', exclude='', patterntype='fnmatch'):
-    from .stringutil import is_str
+
     """ internal use """
     m, x = match, exclude
     if m == '*':
         if not x:
             pred = lambda n: True
         else:
-            x = [x] if is_str(x) else x
+            x = [x] if _is_str(x) else x
             matcher = get_match_fun(x, patterntype)
             pred = lambda n: not matcher(n)
     else:
-        m = [m] if is_str(m) else m
+        m = [m] if _is_str(m) else m
         if not x:
             matcher = get_match_fun(m, patterntype)
             pred = lambda n: matcher(n)
         else:
-            x = [x] if is_str(x) else x
+            x = [x] if _is_str(x) else x
             matcher_m = get_match_fun(m, patterntype)
             matcher_x = get_match_fun(x, patterntype)
             pred = lambda n: matcher_m(n) and not matcher_x(n)
@@ -484,3 +491,49 @@ def filecopy(src, dst):
     shutil.copy(src, dst)
 
 
+def download(url, out=None):
+    import wget
+    if out is not None:
+        mkdir_if_not(out)
+    logg.info('downloading... [{}] to [{}]'.format(url, out))
+    f = wget.download(url, out=out)
+
+    return f
+
+
+def download_if_not(url, f):
+    if not os.path.exists(f):
+        f = download(url, f)
+    return f
+
+
+def unzip(z, member=None):
+    import zipfile
+    zip = zipfile.ZipFile(z, 'r')
+    path = os.path.dirname(z)
+    if member is None:
+        zip.extractall(path)
+        logg.info('unzip [{}] to [{}]'.format(z, path))
+    else:
+        zip.extract(member, path)
+        logg.info('unzip [{}] to [{}]'.format(member, path))
+    zip.close()
+
+
+def untar(t, member=None):
+    import tarfile
+    tar = tarfile.open(t)
+    path = os.path.dirname(tar)
+    if member is None:
+        tar.extractall(path)
+        logg.info('unzip [{}] to [{}]'.format(t, path))
+    else:
+        tar.extract(member, path)
+        logg.info('unzip [{}] to [{}]'.format(member, path))
+    tar.close()
+
+
+def anyfile(pattern):
+    for f in listfile(pattern):
+        return True
+    return False
