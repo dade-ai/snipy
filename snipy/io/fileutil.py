@@ -509,8 +509,8 @@ def download_if_not(url, f):
 
 def unzip(z, member=None):
     import zipfile
-    zip = zipfile.ZipFile(z, 'r')
     path = os.path.dirname(z)
+    zip = zipfile.ZipFile(z, 'r')
     if member is None:
         zip.extractall(path)
         logg.info('unzip [{}] to [{}]'.format(z, path))
@@ -522,8 +522,8 @@ def unzip(z, member=None):
 
 def untar(t, member=None):
     import tarfile
+    path = os.path.dirname(t)
     tar = tarfile.open(t)
-    path = os.path.dirname(tar)
     if member is None:
         tar.extractall(path)
         logg.info('unzip [{}] to [{}]'.format(t, path))
