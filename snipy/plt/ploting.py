@@ -66,6 +66,7 @@ def plt_range(*args, **kwargs):
     """
     for i in plot_range(n):
         plt.imshow(imgs[i])
+
     left arrow yield prev value
     other key yield next value
     :param args:
