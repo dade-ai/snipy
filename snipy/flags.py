@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# todo@dade move to snipy
-
 from __future__ import absolute_import
 from collections import (MutableMapping)
 
@@ -22,12 +20,10 @@ def _str2eval(v):
 
 # add other type parsing methods
 _parser = _argparse.ArgumentParser()
-_parser.register('type', bool, _str2bool)
-_parser.register('type', list, _str2eval)
-_parser.register('type', tuple, _str2eval)
-
-
+_parser.register('type', 'bool', _str2bool)
+_parser.register('type', 'list', _str2eval)
 # _parser.register('type', 'tuple', _str2eval)
+
 
 # region flag class
 
@@ -115,8 +111,8 @@ class _FlagValuesNone(MutableMapping):
         def gettype_default(v):
             if v is None:
                 return str, v
-            # elif isinstance(v, bool):
-            #     return 'bool', v
+            elif isinstance(v, bool):
+                return 'bool', v
             elif type(v) is type:
                 # 디폴트 대신 type이 들어옴. 디폴트 없는 것으로
                 return v, None
@@ -129,7 +125,6 @@ class _FlagValuesNone(MutableMapping):
         if dtype is None:
             dtype, default_value = gettype_default(default_value)
 
-        # h += ' : default = %s' % default_value
         h += ' : default = {}'.format(default_value)
 
         _parser.add_argument('--' + flagname, type=dtype,

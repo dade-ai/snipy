@@ -26,19 +26,25 @@ from matplotlib._cm import datad
 
 def _cmap_fun(cm):
 
-    def wrapper(x, alpha=None, bytes=False, lut=None):
+    def wrapper(x, alpha=None, bytes=False, lut=None, clim=None, norm=None):
         cmap = plt.get_cmap(cm, lut=lut)
+        if norm is None:
+            clim = clim or (0., 1.)
+            norm = plt.Normalize(vmin=clim[0], vmax=clim[1])
+        x = norm(x)
+
         return cmap(x, alpha=alpha, bytes=bytes)
+
     return wrapper
 
 
 # explicte declaration (for example)
-def jet(x, alpha=None, bytes=False, lut=None):
-    return _cmap_fun('jet')(x, alpha=alpha, bytes=bytes, lut=lut)
+def jet(x, alpha=None, bytes=False, lut=None, clim=None, norm=None):
+    return _cmap_fun('jet')(x, alpha=alpha, bytes=bytes, lut=lut, clim=clim, norm=norm)
 
 
 # fill functions
 locals().update({cm: _cmap_fun(cm) for cm in datad.keys()})
-locals().update({cm: _cmap_fun(cm+'_r') for cm in datad.keys()})
+locals().update({cm+'_r': _cmap_fun(cm+'_r') for cm in datad.keys()})
 
 
