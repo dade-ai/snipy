@@ -479,3 +479,28 @@ def canny(img, threshold1=255/3, threshold2=255, **kwargs):
     return edge
 
 
+def _convert_uint8(im):
+    if im.dtype != np.uint8:
+        im = np.uint8(im * 255)
+    return im
+
+
+@tuple_args
+def alpha_composite(images):
+    from PIL import Image
+
+    # images
+
+    # backward
+    # images = reversed(images)
+    # out = Image
+    out = Image.fromarray(_convert_uint8(images[0]))
+    for img in images[1:]:
+        img = Image.fromarray(_convert_uint8(img))
+        # check same size?
+        # Image.alpha_composite(bg, fg)
+        # alpha composite im2 over im1
+        out = Image.alpha_composite(img, out)
+
+    return np.asarray(out, dtype='float32') / 255.
+
