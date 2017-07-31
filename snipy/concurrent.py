@@ -47,7 +47,7 @@ class ConcurrentCommon(object):
 
     @property
     def done(self):
-        return self.is_alive()
+        return not self.is_alive()
 
 
 class Threaded(Thread, ConcurrentCommon):
