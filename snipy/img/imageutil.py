@@ -187,6 +187,7 @@ def snoise2d(size, z=0.0, scale=0.05, octaves=1, persistence=0.25, lacunarity=2.
 def snoise2dz(size, z, scale=0.05, octaves=1, persistence=0.25, lacunarity=2.0):
     """
     z as seeds
+    scale이 작을 수록 패턴이 커지는 효과
     """
     import noise
     z_l = len(z)
