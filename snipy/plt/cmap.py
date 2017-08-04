@@ -24,7 +24,7 @@ from matplotlib._cm import datad
 #                             'gist_rainbow', 'rainbow', 'jet', 'nipy_spectral', 'gist_ncar'])]
 
 
-def _cmap_fun(cm):
+def cmap_fun(cm):
 
     def wrapper(x, alpha=None, bytes=False, lut=None, clim=None, norm=None):
         cmap = plt.get_cmap(cm, lut=lut)
@@ -40,11 +40,11 @@ def _cmap_fun(cm):
 
 # explicte declaration (for example)
 def jet(x, alpha=None, bytes=False, lut=None, clim=None, norm=None):
-    return _cmap_fun('jet')(x, alpha=alpha, bytes=bytes, lut=lut, clim=clim, norm=norm)
+    return cmap_fun('jet')(x, alpha=alpha, bytes=bytes, lut=lut, clim=clim, norm=norm)
 
 
 # fill functions
-locals().update({cm: _cmap_fun(cm) for cm in datad.keys()})
-locals().update({cm+'_r': _cmap_fun(cm+'_r') for cm in datad.keys()})
+locals().update({cm: cmap_fun(cm) for cm in datad.keys()})
+locals().update({cm+'_r': cmap_fun(cm + '_r') for cm in datad.keys()})
 
 
