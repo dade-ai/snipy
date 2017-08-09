@@ -45,6 +45,15 @@ class IterChain(object):
         return 'IterChain%s' % str(self._iterables)
 
 
+class iterable(object):
+
+    def __init__(self, gen):
+        self._gen = gen
+
+    def __call__(self, *args, **kwargs):
+        return iterator(self._gen, *args, **kwargs)
+
+
 class iterator(object):
     """
     decorator or like a function for converting generator fun to iterator
@@ -112,7 +121,7 @@ def iterate(g, *args, **kwargs):
     return it(*args, **kwargs)
 
 
-class iterflow(iterator):
+class iterflow(iterable):
 
     def __rshift__(self, other):
         return IterChain(self, other)

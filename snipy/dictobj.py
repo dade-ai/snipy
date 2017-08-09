@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import Mapping
 
 
 class DictObj(dict):
@@ -57,7 +58,7 @@ class DictObj(dict):
 
     @staticmethod
     def convert_ifdic(value):
-        if isinstance(value, dict):
+        if isinstance(value, Mapping):
             return DictObj.from_dict(value)
         else:
             return value
