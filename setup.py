@@ -62,5 +62,5 @@ setup(name='snipy',
             'joblib',
             'noise',
             'scikit-image',
-            'pympler'
+            'pympler',
       ])
