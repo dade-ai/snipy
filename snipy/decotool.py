@@ -50,7 +50,7 @@ def optional_str(deco):
 
         # when only function arg
         if not kwargs and len(args) == 1 \
-                and not isinstance(args[0], (str, basestring)) \
+                and not isinstance(args[0], str) \
                 and args[0] is not None:
             decorator = deco()
             return decorator(args[0])

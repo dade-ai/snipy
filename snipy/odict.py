@@ -1,31 +1,60 @@
 # -*- coding: utf-8 -*-
-# -*- coding: utf-8 -*-
-from collections import (Mapping, OrderedDict)
+# from six
+from collections import (OrderedDict, MutableMapping, Mapping)
 
 
-class OrderedDictObj(OrderedDict):
-    """
-    object attribute 혹은 dictionary처럼 접근하는 클래스
-    """
+class ODict(MutableMapping):
 
     def __init__(self, *args, **kwargs):
-        super(OrderedDict, self).__init__(*args, **kwargs)
-        self.__dict__ = self
+        self._odict = OrderedDict(*args, **kwargs)
+
+    def __setitem__(self, key, value):
+        self._odict[key] = value
+
+    def __getitem__(self, item):
+        return self._odict[item]
+
+    def __delitem__(self, key):
+        del self.__dict__[key]
+
+    def __setattr__(self, key, value):
+        if key == '_odict':
+            super(ODict, self).__setattr__(key, value)
+        else:
+            self._odict[key] = value
 
     def __getattr__(self, item):
-        """
-        해당 키가 없을 때 None을 준다.
-        :param item: 키
-        :rtype None:
-        """
-        return None
+        return self._odict.get(item, None)
+
+    def __iter__(self):
+        return iter(self._odict)
+
+    def __len__(self):
+        return len(self._odict)
+
+    def __str__(self):
+        return str(self._odict).replace('OrderedDict', 'odict', count=1)
+
+    def __repr__(self):
+        return self._odict.__repr__().replace('OrderedDict', 'odict', count=1)
+
+    def pop(self, key, **kw):
+        return self._odict.pop(key, **kw)
+
+    def popitem(self):
+        return self._odict.popitem()
+
+    def clear(self):
+        self._odict.clear()
+
+    def update(self, *args, **kwds):
+        self._odict.update(*args, **kwds)
+
+    def setdefault(self, key, default=None):
+        return self._odict.setdefault(key, default=default)
 
     def __sub__(self, other):
-        """
-        :type other: dict
-        :rtype: dictobj: other dict에 없는 items만 리턴
-        """
-        return OrderedDict({k: v for k, v in self.items() if k not in other})
+        return ODict((k, v) for k, v in self.items() if k not in other)
 
     def __add__(self, other):
         if not other:
@@ -41,13 +70,13 @@ class OrderedDictObj(OrderedDict):
         return tuple()
 
     def __getstate__(self):
-        return self.__dict__
+        return self._odict
 
     def __setstate__(self, d):
-        self.__dict__.update(d)
+        self._odict.update(d)
 
     def copy(self):
-        return OrderedDict(super(OrderedDict, self).copy())
+        return ODict((k, v) for k, v in self.items())
 
     def intersect(self, other):
         """
@@ -55,14 +84,7 @@ class OrderedDictObj(OrderedDict):
         :type other: dict
         :rtype: dictobj:
         """
-        return OrderedDict({k: self[k] for k in self if k in other})
-
-    @staticmethod
-    def convert_ifdic(value):
-        if isinstance(value, Mapping):
-            return OrderedDict.from_dict(value)
-        else:
-            return value
+        return ODict((k, self[k]) for k in self if k in other)
 
     @staticmethod
     def from_dict(dic):
@@ -71,9 +93,16 @@ class OrderedDictObj(OrderedDict):
         :param dic:
         :return:
         """
-        return OrderedDict({k: OrderedDict.convert_ifdic(v) for k, v in dic.items()})
+        return ODict((k, ODict.convert_ifdic(v)) for k, v in dic.items())
+
+    @staticmethod
+    def convert_ifdic(value):
+        if isinstance(value, Mapping):
+            return ODict.from_dict(value)
+        else:
+            return value
 
 
 # alias
-odict = OrderedDictObj
+odict = ODict
 

@@ -9,7 +9,7 @@ http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-048.pdf
 
 
 def ansi_str(s, fmt):
-    if isinstance(s, (str, basestring)):
+    if isinstance(s, str):
         return '\x1b[%sm%s\x1b[0m' % (fmt, s)
     else:
         return '\x1b[%sm%s\x1b[0m' % (fmt, str(s))
@@ -75,7 +75,14 @@ class _ColorAnsi(object):
     def __div__(self, other):
         return _AnsiBuilder(self.fg) / other
 
+    def __rtruediv__(self, other):
+        # python3
+        return _AnsiBuilder(self.fg) / other
+
     def __rdiv__(self, other):
+        return other * _AnsiBuilder(self.bg)
+
+    def __rtruediv__(self, other):
         return other * _AnsiBuilder(self.bg)
 
     @property
@@ -88,7 +95,8 @@ class _NoAnsi(object):
         pass
 
     def __call__(self, s):
-        if isinstance(s, (str, basestring)):
+        # if isinstance(s, (str, basestring)):  # python2 only
+        if isinstance(s, str):
             return s
         else:
             return str(s)

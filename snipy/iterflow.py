@@ -440,7 +440,7 @@ def queue_class(QueueClass):
 
         def reset(self):
             # reset = produce
-            print 'reset Q'
+            print('reset Q')
             self.produce()
 
         @property

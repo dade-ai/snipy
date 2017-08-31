@@ -100,7 +100,7 @@ def plt_range(*args, **kwargs):
         fig = plt.gcf()
         if figsize:
             fig.set_size_inches(figsize)
-    elif isinstance(fig, (int, str, basestring)):
+    elif isinstance(fig, (int, str)):
         if figsize:
             fig = plt.figure(fig, figsize=figsize)
         else:

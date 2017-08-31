@@ -26,7 +26,7 @@ class Enum(object):
 def enum(name, *members, **withvalue):
     """class buider"""
     if len(members) == 1:
-        if isinstance(members[0], (str, basestring)):
+        if isinstance(members[0], str):
             members = members[0].split()
         elif isinstance(members[0], (list, tuple)):
             members = members[0]
@@ -44,6 +44,6 @@ if __name__ == '__main__':
         apple = 2
 
     for f in Fruits:
-        print f
-    print 1 in Fruits
+        print(f)
+    print(1 in Fruits)
 

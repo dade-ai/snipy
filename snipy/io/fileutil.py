@@ -291,7 +291,11 @@ def get_match_fun(patterns, patterntype):
 
 
 def _is_str(x):
-    return isinstance(x, (str, basestring))
+    
+    try:
+        return isinstance(x, (str, basestring))
+    except NameError:
+        return isinstance(x, str)
 
 
 def _pred_pattern(match='*', exclude='', patterntype='fnmatch'):

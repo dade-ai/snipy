@@ -171,8 +171,8 @@ if __name__ == '__main__':
     f = [lambda x:x+1, lambda x:x+2, lambda y: y+3]
     l = listchain(f)
     ll = l >> (lambda x: x + 4)
-    print 0 >> l
-    print l(0)
-    print ll(0)
+    print(0 >> l)
+    print(l(0))
+    print(ll(0))
 
 

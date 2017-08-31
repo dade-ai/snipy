@@ -153,7 +153,7 @@ class trace(object):
 
     def __init__(self, level=logging.DEBUG, logger=None):
         self.level = level
-        if logger is None or isinstance(logger, (str, basestring)):
+        if logger is None or isinstance(logger, str):
             logger = getlogger(logger)
         self.logger = logger
 

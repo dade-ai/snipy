@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-from itertools import izip
 
 import numpy as np
 from snipy import irandom as rand
@@ -163,7 +162,7 @@ def snoise2dvec(size, *params, **kwargs):  #, vlacunarity):
     :param vlacunarity:
     :return:
     """
-    data = (snoise2d(size, *p, **kwargs) for p in izip(*params))  # , vlacunarity))
+    data = (snoise2d(size, *p, **kwargs) for p in zip(*params))  # , vlacunarity))
     return np.stack(data, 0)
 
 

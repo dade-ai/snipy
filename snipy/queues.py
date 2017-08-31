@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-import Queue as PQ
+try:
+    import Queue as PQ
+except ModuleNotFoundError:
+    import queue as PQ
+
 from random import randrange
 
 import errno

@@ -12,7 +12,7 @@ def named(typename, *fieldnames, **defaults):
     :return:
     """
     if len(fieldnames) == 1:
-        if isinstance(fieldnames[0], (str, basestring)):
+        if isinstance(fieldnames[0], str):
             fieldnames = tuple(fieldnames[0].replace(',', ' ').split())
         elif isinstance(fieldnames[0], (list, tuple)):
             fieldnames = fieldnames[0]
