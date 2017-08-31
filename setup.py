@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 
 setup(name='snipy',
-      version='0.0.4',
+      version='0.0.4.1',
       description='python utility @ your own risk',
       long_description='snippet-like code to make snippet-like code',
 
@@ -46,6 +46,7 @@ setup(name='snipy',
           # that you indicate whether you support Python 2, Python 3 or both.
           'Programming Language :: Python :: 2',
           'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
       ],
 
       packages=find_packages(),
@@ -57,10 +58,18 @@ setup(name='snipy',
             'matplotlib',
             'scandir',
             'Pillow',
-            'python_cjson',
             'h5py',
             'joblib',
             'noise',
             'scikit-image',
             'pympler',
-      ])
+      ],
+      extra_require={
+            ':python_version == "2.7"': [
+                  'python_cjson',
+            ],
+            ':python_version >= "3.0"': [
+                  'ujson',
+            ]
+      }
+      )
