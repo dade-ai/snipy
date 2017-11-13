@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
-import cjson
+try:
+    import cjson as json
+except ModuleNotFoundError:
+    import ujson as json
+
+
 import numpy as np
 
 
 def numpy_to_json(x):
-    return cjson.encode(x.tolist())
+    return json.encode(x.tolist())
 
 
 def tojson(o):
@@ -12,8 +17,8 @@ def tojson(o):
     recursive implementation
     """
     try:
-        return cjson.encode(o)
-    except cjson.EncodeError:
+        return json.encode(o)
+    except json.EncodeError:
         pass
     try:
         return o.tojson()

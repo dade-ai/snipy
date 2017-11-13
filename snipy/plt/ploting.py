@@ -154,6 +154,14 @@ def plot_pause(timeout=None, msg=''):
     return len(plt.get_fignums()) != 0
 
 
+def ploting(iterable, timeout=None, msg=''):
+    for res in iterable:
+        yield res
+        if not plot_pause(timeout, msg):
+            break
+    raise StopIteration
+
+
 def flat_images(images, grid=None, bfill=1.0, bsz=(1, 1)):
     """
     convert batch image to flat image with margin inserted

@@ -538,6 +538,5 @@ def untar(t, member=None):
 
 
 def anyfile(pattern):
-    for f in listfile(pattern):
-        return True
-    return False
+    import glob
+    return any(glob.glob(pattern))
