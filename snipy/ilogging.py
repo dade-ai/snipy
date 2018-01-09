@@ -89,7 +89,7 @@ class Loggerx(logging.Logger):
 logging.setLoggerClass(Loggerx)
 
 
-def getlogger(pkg=''):
+def getlogger(pkg='', handler=None):
     """
     패키지 혹은 채널 로거
     logging.getLogger(package_name) or logg.getLogger()
@@ -108,7 +108,7 @@ def getlogger(pkg=''):
     else:
         # local
         logger = logging.getLogger(pkg)
-        logger.addHandler(default_handler)
+        logger.addHandler(handler or default_handler)
         logger.setLevel(logging.DEBUG)
         return logger
 

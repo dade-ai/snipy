@@ -22,7 +22,10 @@ def mkdir_if_not(filepath, ispath=False):
         return filepath
     if not os.path.exists(p):
         # M.info('%s not exist, trying mkdir ', p)
-        os.makedirs(p)
+        try:
+            os.makedirs(p)
+        except FileExistsError as e:
+            logg.warn(str(e))
 
     return filepath
 
