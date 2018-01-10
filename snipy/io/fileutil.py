@@ -367,7 +367,7 @@ def tempfolder(prefix=''):
     """임시 폴더를 만들어서 리턴"""
     import uuid
 
-    p = prefix + str(uuid.UUID(bytes=os.urandom(16), version=4))
+    p = prefix + str(uuid.uuid4())
     d = tempdir()
     tmpd = os.path.join(d, p)
     return mkdir_if_not(tmpd, ispath=True)
@@ -381,7 +381,7 @@ def tempfile(mode, ext='', **kwargs):
     if ext and not ext.startswith('.'):
         ext = '.' + ext
 
-    fname = os.path.join(d, str(uuid.UUID(bytes=os.urandom(16), version=4)) + ext)
+    fname = os.path.join(d, str(uuid.uuid4()) + ext)
     return open(fname, mode, **kwargs)
 
 
