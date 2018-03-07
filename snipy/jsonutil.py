@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 try:
     import cjson as json
-except ModuleNotFoundError:
+except Exception:
     import ujson as json
 
 

@@ -198,7 +198,10 @@ def run(main=None, argv=None, **flags):
         _parser.usage = 'from docstring \n {}'.format(docstring)  # add_help
 
     # if not flags:
-    a = inspect.getargspec(main)  # namedtuple(args, varargs, keywords, defaults)
+    try:
+        a = inspect.getfullargspec(main)
+    except AttributeError:
+        a = inspect.getargspec(main)  # namedtuple(args, varargs, keywords, defaults)
     if a.defaults:
         kwargs = dict(zip(reversed(a.args), reversed(a.defaults)))
         add_flag(**kwargs)

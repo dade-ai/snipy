@@ -21,8 +21,8 @@ try:
     _new_settings[3] &= ~termios.ECHO
 
 except Exception as e:
-    from .ilogging import logg
-    logg.warn('not a tty?: %s:' % e)
+    # from .ilogging import logg
+    # logg.warn('not a tty?: %s:' % e)
     pass
 
 
