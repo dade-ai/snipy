@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
 import matplotlib.pyplot as plt
-from six import wraps
+from functools import wraps
 from matplotlib._cm import datad
 
 # reverse all the colormaps.

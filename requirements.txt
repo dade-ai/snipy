@@ -1,16 +1,15 @@
-six>=1.10.0
-Jinja2>=2.9.6
 numpy>=1.13.0
 setuptools>=36.0.1
-matplotlib>=2.0.2
-scandir>=1.5
-Pillow>=4.1.1
-python_cjson>=1.2.1; python_version <= '2.7'
-ujson>=1.2.1; python_version >= '3'
-h5py==2.7.0
-joblib>=0.11
-noise>=1.2.2
-scikit-image>=0.13.0
-wget >= 3.2
-pympler
-pycuda
+Jinja2[all]>=2.9.6
+matplotlib[plot]>=2.0.2
+scandir[file]>=1.5
+Pillow[image]>=4.1.1
+joblib[file]>=0.11
+pycuda[all]
+pympler[all]
+ujson[json]>=1.2.1
+noise[perlin]>=1.2.2
+wget[file]>= 3.2
+h5py[h5]>=2.7.0
+scikit-image[plot]>=0.13.0
+scikit-image[image]>=0.13.0

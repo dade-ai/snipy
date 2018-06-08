@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import snipy.common as sp
-import six
 
 
 def test_odict():
@@ -14,6 +13,7 @@ def test_odict():
     assert d['c'] == d.c == 2121
     print(list(d.keys()))
     assert list(d.keys()) == 'a b c'.split()
+
 
 if __name__ == '__main__':
     test_odict()

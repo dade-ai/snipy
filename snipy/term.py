@@ -6,8 +6,6 @@ http://wiki.bash-hackers.org/scripting/terminalcodes
 http://ascii-table.com/ansi-escape-sequences.php
 http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-048.pdf
 """
-from __future__ import absolute_import
-
 import termios
 import sys
 # from dictobj import dictobj

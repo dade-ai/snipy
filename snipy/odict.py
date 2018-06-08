@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# from six
 from collections import (OrderedDict, MutableMapping, Mapping)
 
 

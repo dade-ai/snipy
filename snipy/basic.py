@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from six import wraps
+from functools import wraps
 from contextlib import contextmanager
 import signal
 

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
 from .queues import QueueInterruptable, is_main_alive
 from .concurrent import Threaded
 

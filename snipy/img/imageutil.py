@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import
-
 import numpy as np
 from snipy import irandom as rand
 from snipy.basic import tuple_args

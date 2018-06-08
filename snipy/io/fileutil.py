@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
 import os
 from codecs import open
 import scandir
@@ -71,14 +70,17 @@ def savefile(obj, filepath, compress=True):
     :param compress:
     :return:
     """
-    import cPickle
+    try:
+        import cPickle as pickle
+    except Exception:
+        import pickle
     import joblib
 
     # 일단 임시 파일에 저장.
     tmpfile = filepath + '.tmp'
     mkdir_if_not(tmpfile)
     if compress:
-        joblib.dump(obj, tmpfile, compress=3, cache_size=100, protocol=cPickle.HIGHEST_PROTOCOL)
+        joblib.dump(obj, tmpfile, compress=3, cache_size=100, protocol=pickle.HIGHEST_PROTOCOL)
     else:
         joblib.dump(obj, tmpfile, compress=0)
 
@@ -159,7 +161,10 @@ def load_or_run(filepath, fun, *args, **kwargs):
 
 
 def readhdf5(f):
+    import warnings
+    warnings.simplefilter(action='ignore', category=FutureWarning)
     import h5py
+    warnings.resetwarnings()
 
     return h5py.File(f, 'r')
 

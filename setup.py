@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 
 setup(name='snipy',
-      version='0.0.4.1',
+      version='0.0.5.1',
       description='python utility @ your own risk',
       long_description='snippet-like code to make snippet-like code',
 
@@ -44,32 +44,23 @@ setup(name='snipy',
 
           # Specify the Python versions you support here. In particular, ensure
           # that you indicate whether you support Python 2, Python 3 or both.
-          'Programming Language :: Python :: 2',
-          'Programming Language :: Python :: 2.7',
-          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.6',
       ],
 
       packages=find_packages(),
       install_requires=[
-            'six',
-            'Jinja2',
             'numpy',
             'setuptools',
-            'matplotlib',
-            'scandir',
-            'Pillow',
-            'h5py',
-            'joblib',
-            'noise',
-            'scikit-image',
-            'pympler',
       ],
-      extra_require={
-            ':python_version == "2.7"': [
-                  'python_cjson',
-            ],
-            ':python_version >= "3.0"': [
-                  'ujson',
-            ]
+      extras_require={
+            'all': ['Jinja2'],
+            'plot': ['scikit-image', 'matplotlib'],
+            'image': ['scikit-image', 'Pillow', 'scikit-image'],
+            'file': ['joblib', 'scandir'],
+            'perlin': ['noise'],
+            'h5': ['h5py'],
+            'json': ['ujson'],
+            'sizeof': ['pympler'],
+            'cuda': ['pycuda'],  # todo 다른 모듈로 나중에 바꾸자
       }
       )

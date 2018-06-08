@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
-
 from snipy.ilogging import logg
 from snipy.basic import tuple_args
 from snipy.progress import progress

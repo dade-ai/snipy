@@ -9,7 +9,6 @@ what's called.
 """
 # https://github.com/unwitting/imageme
 
-from __future__ import absolute_import
 # Dependencies
 import base64, io, os, re, sys, threading, SimpleHTTPServer, SocketServer
 

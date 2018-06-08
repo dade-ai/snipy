@@ -2,8 +2,6 @@
 """
 package util, inspection related
 """
-from __future__ import absolute_import
-
 import os
 import sys
 from os.path import dirname
