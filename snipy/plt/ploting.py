@@ -3,7 +3,13 @@ from snipy.ilogging import logg
 from snipy.basic import tuple_args
 from snipy.progress import progress
 import contextlib
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+except ImportError as e:
+    # apt update && apt install -y python3-tk.  if need ploting module
+    print('warning: apt update && apt install -y python3-tk. if need ploting module', e)
+    pass
+
 import numpy as np
 
 

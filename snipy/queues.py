@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 try:
     import Queue as PQ
-except ModuleNotFoundError:
+except ImportError:  # ModuleNotFoundError:
     import queue as PQ
 
 from random import randrange

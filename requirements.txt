@@ -1,8 +1,8 @@
 numpy>=1.13.0
 setuptools>=36.0.1
+scandir>=1.5
 Jinja2[all]>=2.9.6
 matplotlib[plot]>=2.0.2
-scandir[file]>=1.5
 Pillow[image]>=4.1.1
 joblib[file]>=0.11
 pycuda[all]
