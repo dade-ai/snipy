@@ -45,13 +45,13 @@ def grid_recommend(count, ratio=(2., 3.)):
     return int(h), int(w)
 
 
-def imshow_grid(images, grid=None, showfun=plt.imshow, **opt):
+def imshow_grid(images, grid=None, showfun=None, **opt):
     """
     :param images: nhwc
     :return:
     """
     # assert images.ndim == 4  or list
-
+    showfun = showfun or plt.imshow
     count = len(images)
     grid = grid or grid_recommend(count, sorted(images[0].shape[:2]))
 
@@ -214,7 +214,7 @@ def flat_images(images, grid=None, bfill=1.0, bsz=(1, 1)):
     return data
 
 
-def imshow_flat(images, grid=None, showfun=plt.imshow, bfill=1.0, bsz=(1,1), **opt):
+def imshow_flat(images, grid=None, showfun=None, bfill=1.0, bsz=(1,1), **opt):
     """
     imshow after applying flat_images
     :param images: [bhwc]
@@ -225,6 +225,8 @@ def imshow_flat(images, grid=None, showfun=plt.imshow, bfill=1.0, bsz=(1,1), **o
     :param opt: option for showfun
     :return:
     """
+    showfun = showfun or plt.imshow
+
     count = len(images)
     # decide grid shape if need pick one
     grid = grid or grid_recommend(count, ratio=sorted(images[0].shape[:2]))
@@ -234,7 +236,8 @@ def imshow_flat(images, grid=None, showfun=plt.imshow, bfill=1.0, bsz=(1,1), **o
     plt.draw()
 
 
-def imshows_flat(images, subgrid=None, grid=None, showfun=plt.imshow, bfill=1.0, bsz=(1,1), **opt):
+def imshows_flat(images, subgrid=None, grid=None, showfun=None, bfill=1.0, bsz=(1,1), **opt):
+    showfun = showfun or plt.imshow
     count = len(images[0])
 
     grid = grid or grid_recommend(count, ratio=sorted(images[0][0].shape[:2]))
@@ -244,7 +247,8 @@ def imshows_flat(images, subgrid=None, grid=None, showfun=plt.imshow, bfill=1.0,
 
 
 @tuple_args
-def imshow(imagez, grid=None, showfun=plt.imshow, bfill=1.0, bsz=(1,1), tight=True, **opt):
+def imshow(imagez, grid=None, showfun=None, bfill=1.0, bsz=(1,1), tight=True, **opt):
+    showfun = showfun or plt.imshow
     if len(imagez) == 1:
         if imagez[0].ndim == 2:
             res = showfun(imagez[0], **opt)
@@ -584,9 +588,9 @@ class PlotMovieWriter(object):
 
     """
 
-    def __init__(self, outfile, showfun=plt.imshow, fig=None, drawopt=None, dpi=100, **movieopt):
+    def __init__(self, outfile, showfun=None, fig=None, drawopt=None, dpi=100, **movieopt):
 
-        self.showfun = showfun
+        self.showfun = showfun or plt.imshow
         self.fig = fig or plt.figure()
         drawopt = drawopt or dict()
         self.drawopt = drawopt
