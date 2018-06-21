@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 
 setup(name='snipy',
-      version='0.0.5.1',
+      version='0.0.6',
       description='python utility @ your own risk',
       long_description='snippet-like code to make snippet-like code',
 
