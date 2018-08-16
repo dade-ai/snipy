@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 
 setup(name='snipy',
-      version='0.0.6',
+      version='0.0.7',
       description='python utility @ your own risk',
       long_description='snippet-like code to make snippet-like code',
 
@@ -61,6 +61,6 @@ setup(name='snipy',
             'h5': ['h5py'],
             'json': ['ujson'],
             'sizeof': ['pympler'],
-            'cuda': ['pycuda'],  # todo 다른 모듈로 나중에 바꾸자
+            'cuda': ['pycuda']
       }
       )

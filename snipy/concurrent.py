@@ -4,7 +4,8 @@
 from functools import wraps
 from threading import Thread
 from multiprocessing import Pool, Process
-from multiprocessing.queues import Queue
+# from multiprocessing.queues import Queue
+from multiprocessing import Queue
 
 
 class SharedPool(object):
@@ -93,9 +94,12 @@ def threaded(f, *args, **kwargs):
     return wrapped
 
 
-def spawn(f):
+def spawn(f, *args, **kwargs):
     """decorator
     """
+    if args or kwargs:
+        return Spawn(f, *args, **kwargs)
+
     @wraps(f)
     def wrapped(*args, **kwargs):
         return Spawn(f, *args, **kwargs)
